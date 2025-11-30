@@ -4,7 +4,7 @@ import SwiftUI
 struct jouhouApp: App {
     var body: some Scene {
         WindowGroup {
-            StartView()
+            RootView()
         }
     }
 }

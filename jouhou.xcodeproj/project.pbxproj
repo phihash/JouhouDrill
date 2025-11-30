@@ -7,12 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A91F444C2EDC1C2600DCFC61 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91F44422EDC1C2600DCFC61 /* ContentView.swift */; };
 		A91F444D2EDC1C2600DCFC61 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91F44432EDC1C2600DCFC61 /* ContentViewModel.swift */; };
-		A91F444E2EDC1C2600DCFC61 /* jouhouApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91F44462EDC1C2600DCFC61 /* jouhouApp.swift */; };
 		A91F444F2EDC1C2600DCFC61 /* ScreenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91F44472EDC1C2600DCFC61 /* ScreenManager.swift */; };
-		A91F44502EDC1C2600DCFC61 /* SetSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91F44482EDC1C2600DCFC61 /* SetSelectionView.swift */; };
-		A91F44512EDC1C2600DCFC61 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91F44492EDC1C2600DCFC61 /* StartView.swift */; };
 		A91F44522EDC1C2600DCFC61 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A91F44402EDC1C2600DCFC61 /* Assets.xcassets */; };
 		A91F44532EDC1C2600DCFC61 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A91F44442EDC1C2600DCFC61 /* icon.png */; };
 /* End PBXBuildFile section */
@@ -20,14 +16,10 @@
 /* Begin PBXFileReference section */
 		A91F44212EDAB48900DCFC61 /* jouhou.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jouhou.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A91F44402EDC1C2600DCFC61 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A91F44422EDC1C2600DCFC61 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A91F44432EDC1C2600DCFC61 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		A91F44442EDC1C2600DCFC61 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		A91F44452EDC1C2600DCFC61 /* jouhou.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = jouhou.entitlements; sourceTree = "<group>"; };
-		A91F44462EDC1C2600DCFC61 /* jouhouApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = jouhouApp.swift; sourceTree = "<group>"; };
 		A91F44472EDC1C2600DCFC61 /* ScreenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenManager.swift; sourceTree = "<group>"; };
-		A91F44482EDC1C2600DCFC61 /* SetSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetSelectionView.swift; sourceTree = "<group>"; };
-		A91F44492EDC1C2600DCFC61 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -39,6 +31,16 @@
 		A91F44572EDC3FAD00DCFC61 /* Data */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Data;
+			sourceTree = "<group>";
+		};
+		A91F445A2EDC433000DCFC61 /* Enrty */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Enrty;
+			sourceTree = "<group>";
+		};
+		A91F445B2EDC436000DCFC61 /* Screen */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Screen;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -73,16 +75,14 @@
 		A91F444A2EDC1C2600DCFC61 /* jouhou */ = {
 			isa = PBXGroup;
 			children = (
+				A91F445B2EDC436000DCFC61 /* Screen */,
+				A91F445A2EDC433000DCFC61 /* Enrty */,
 				A91F44572EDC3FAD00DCFC61 /* Data */,
 				A91F44562EDC3F9F00DCFC61 /* Model */,
 				A91F44552EDC237400DCFC61 /* Manager */,
-				A91F44462EDC1C2600DCFC61 /* jouhouApp.swift */,
 				A91F44402EDC1C2600DCFC61 /* Assets.xcassets */,
-				A91F44422EDC1C2600DCFC61 /* ContentView.swift */,
 				A91F44442EDC1C2600DCFC61 /* icon.png */,
 				A91F44452EDC1C2600DCFC61 /* jouhou.entitlements */,
-				A91F44482EDC1C2600DCFC61 /* SetSelectionView.swift */,
-				A91F44492EDC1C2600DCFC61 /* StartView.swift */,
 			);
 			path = jouhou;
 			sourceTree = "<group>";
@@ -114,6 +114,8 @@
 			fileSystemSynchronizedGroups = (
 				A91F44562EDC3F9F00DCFC61 /* Model */,
 				A91F44572EDC3FAD00DCFC61 /* Data */,
+				A91F445A2EDC433000DCFC61 /* Enrty */,
+				A91F445B2EDC436000DCFC61 /* Screen */,
 			);
 			name = jouhou;
 			packageProductDependencies = (
@@ -172,12 +174,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A91F444C2EDC1C2600DCFC61 /* ContentView.swift in Sources */,
 				A91F444D2EDC1C2600DCFC61 /* ContentViewModel.swift in Sources */,
-				A91F444E2EDC1C2600DCFC61 /* jouhouApp.swift in Sources */,
 				A91F444F2EDC1C2600DCFC61 /* ScreenManager.swift in Sources */,
-				A91F44502EDC1C2600DCFC61 /* SetSelectionView.swift in Sources */,
-				A91F44512EDC1C2600DCFC61 /* StartView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
