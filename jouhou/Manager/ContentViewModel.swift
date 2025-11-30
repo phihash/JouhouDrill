@@ -1,6 +1,11 @@
 import SwiftUI
 import Observation
 
+struct Category {
+    var name: String
+    var contentSets: [ContentSet]
+}
+
 struct ContentSet {
     var title: String
     var contents: [Any]
@@ -28,9 +33,10 @@ struct QuizButton {
 
 
 @Observable
-class ContentViewModel{
+class ContentManager{
     
-    var contentSets: [ContentSet] = []
+    var categories: [Category] = []
+    var currentCategoryName = "情報デザイン"
     var currentSetTitle = "基本編"
     var currentIndex = 0
     
@@ -38,8 +44,12 @@ class ContentViewModel{
         resetAllData()
     }
     
+    var currentCategory: Category {
+        return categories.first { $0.name == currentCategoryName } ?? categories[0]
+    }
+    
     var currentSet: ContentSet {
-        return contentSets.first { $0.title == currentSetTitle } ?? contentSets[0]
+        return currentCategory.contentSets.first { $0.title == currentSetTitle } ?? currentCategory.contentSets[0]
     }
     
     var currentContents: [Any] {
@@ -65,9 +75,10 @@ class ContentViewModel{
             print("Quiz answer selected: \(buttonIndex)")
             quizItem.selectedIndex = buttonIndex
             
-            // タイトルからセットのインデックスを見つけて更新
-            if let setIndex = contentSets.firstIndex(where: { $0.title == currentSetTitle }) {
-                contentSets[setIndex].contents[currentIndex] = quizItem
+            // カテゴリとセットのインデックスを見つけて更新
+            if let categoryIndex = categories.firstIndex(where: { $0.name == currentCategoryName }),
+               let setIndex = categories[categoryIndex].contentSets.firstIndex(where: { $0.title == currentSetTitle }) {
+                categories[categoryIndex].contentSets[setIndex].contents[currentIndex] = quizItem
             }
             print("Quiz selectedIndex is now: \(quizItem.selectedIndex)")
         }
@@ -86,20 +97,23 @@ class ContentViewModel{
     
     func resetAllData() {
         // 元データから新しいコピーを作成
-        contentSets = originalContentData
+        categories = originalContentData
     }
     
-    func selectSet(title: String) {
-        currentSetTitle = title
+    func selectSet(categoryName: String, setTitle: String) {
+        currentCategoryName = categoryName
+        currentSetTitle = setTitle
         currentIndex = 0
         resetCurrentSet()
     }
     
     func resetCurrentSet() {
         // 現在のセットだけ元データからコピーし直し
-        if let setIndex = contentSets.firstIndex(where: { $0.title == currentSetTitle }),
-           let originalSet = originalContentData.first(where: { $0.title == currentSetTitle }) {
-            contentSets[setIndex] = originalSet
+        if let categoryIndex = categories.firstIndex(where: { $0.name == currentCategoryName }),
+           let originalCategory = originalContentData.first(where: { $0.name == currentCategoryName }),
+           let originalSet = originalCategory.contentSets.first(where: { $0.title == currentSetTitle }),
+           let setIndex = categories[categoryIndex].contentSets.firstIndex(where: { $0.title == currentSetTitle }) {
+            categories[categoryIndex].contentSets[setIndex] = originalSet
         }
     }
     

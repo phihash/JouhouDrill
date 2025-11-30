@@ -2,36 +2,60 @@ import SwiftUI
 
 struct SetSelectionView: View {
     let screenManager: ScreenManager
-    let contentViewModel: ContentViewModel
+    let contentManager: ContentManager
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 20) {
-                Text("コンテンツセット選択")
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .padding()
-                
-                ForEach(0..<contentViewModel.contentSets.count, id: \.self) { index in
-                    Button {
-                        contentViewModel.selectSet(title: contentViewModel.contentSets[index].title)
-                        screenManager.navigateTo(.firstQuestion)
-                    } label: {
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(Color.blue)
-                            .frame(height: 60)
-                            .overlay {
-                                Text(contentViewModel.contentSets[index].title)
-                                    .foregroundStyle(.white)
-                                    .font(.headline)
-                                    .fontWeight(.bold)
+            ScrollView{
+                VStack(spacing: 20) {
+                    
+
+                    ForEach(0..<contentManager.categories.count, id: \.self) { categoryIndex in
+                        let category = contentManager.categories[categoryIndex]
+                        
+                        HStack{
+                            Text(category.name)
+                                .font(.title3)
+                                .fontWeight(.bold)
+                                .padding(.top, 20)
+                                .padding(.horizontal, 24)
+                            Spacer()
+                        }
+                        
+                        ForEach(0..<category.contentSets.count, id: \.self) { setIndex in
+                            let contentSet = category.contentSets[setIndex]
+                            Button {
+                                contentManager.selectSet(categoryName: category.name, setTitle: contentSet.title)
+                                screenManager.navigateTo(.firstQuestion)
+                            } label: {
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(Color.calm)
+                                    .frame(height: 60)
+                                    .overlay {
+                                        Text(contentSet.title)
+                                            .foregroundStyle(.white)
+                                            .font(.headline)
+                                            .fontWeight(.bold)
+                                    }
                             }
+                            .padding(.horizontal, 24)
+                        }
                     }
-                    .padding(.horizontal, 24)
+                    
+                    Spacer()
                 }
-                
-                Spacer()
             }
+            .padding(.top,64)
+            
+        }
+        .safeAreaInset(edge:.top){
+            
+            Text("情報ドリル")
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(.calm)
+                .foregroundColor(.white)
+            
         }
     }
 }

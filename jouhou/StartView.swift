@@ -2,15 +2,15 @@ import SwiftUI
 
 struct StartView: View {
     @State private var screenManager = ScreenManager()
-    @State private var contentViewModel = ContentViewModel()
+    @State private var contentManager = ContentManager()
     
     var body: some View {
         VStack{
             switch screenManager.currentScreen {
             case .firstQuestion:
-                ContentView(screenManager: screenManager, contentViewModel: contentViewModel)
+                ContentView(screenManager: screenManager, contentManager: contentManager)
             case .setSelection:
-                SetSelectionView(screenManager: screenManager, contentViewModel: contentViewModel)
+                SetSelectionView(screenManager: screenManager, contentManager: contentManager)
             }
         }
     }

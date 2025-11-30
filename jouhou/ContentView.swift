@@ -2,45 +2,48 @@ import SwiftUI
 
 struct ContentView: View {
     let screenManager: ScreenManager
-    let contentViewModel: ContentViewModel
+    let contentManager: ContentManager
     
     var body: some View {
         NavigationView {
+            
             VStack{
                 ScrollView{
-                    ForEach(0...contentViewModel.currentIndex,id: \.self){ index in
-                        contentItemView(content: contentViewModel.currentContents[index], index: index)
+                    ForEach(0...contentManager.currentIndex,id: \.self){ index in
+                        contentItemView(content: contentManager.currentContents[index], index: index)
                     }
                 }
                 Button{
-                    if contentViewModel.isLastItem {
+                    if contentManager.isLastItem {
                         screenManager.navigateTo(.setSelection)
                     } else {
-                        contentViewModel.nextItem()
+                        contentManager.nextItem()
                     }
                 } label : {
                     RoundedRectangle(cornerRadius: 12)
-                        .fill(contentViewModel.canProceed ? Color.blue :Color.gray)
+                        .fill(contentManager.canProceed ? Color.calm :Color.gray)
                         .frame(height: 48)
                         .padding(.horizontal,24)
                         .overlay{
-                            Text(contentViewModel.isLastItem ? "結果画面へ" : "次へ")
+                            Text(contentManager.isLastItem ? "結果画面へ" : "次へ")
                                 .fontWeight(.bold)
                                 .font(.headline)
                                 .foregroundStyle(Color.white)
                         }
                     
                 }
-                .disabled(!contentViewModel.canProceed)
+                .disabled(!contentManager.canProceed)
                 .toolbar{
                     ToolbarItem(placement: .navigationBarTrailing){
                         Button("閉じる"){
-                            contentViewModel.currentIndex = 0
+                            contentManager.currentIndex = 0
                             screenManager.navigateTo(.setSelection)
                         }
                     }
                 }
             }
+            .navigationTitle("タイトル")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
     
@@ -54,23 +57,22 @@ struct ContentView: View {
             Text(titleItem.text)
                 .fontWeight(.bold)
                 .font(.title2)
-                .padding(.top,16)
+                .padding(.top,20)
         }
         
-        if let quizItem = content as? QuizItem, index == contentViewModel.currentIndex {
+        if let quizItem = content as? QuizItem, index == contentManager.currentIndex {
             HStack{
                 Text(quizItem.text)
                     .fontWeight(.bold)
                     .font(.title2)
                     .padding(.top,10)
-                    .padding(.horizontal,24)
-                Spacer()
+                    .padding(.horizontal,12)
             }
             
             VStack(spacing: 12) {
                 ForEach(0..<quizItem.buttons.count, id: \.self) { buttonIndex in
                     Button {
-                        contentViewModel.selectQuizAnswer(buttonIndex)
+                        contentManager.selectQuizAnswer(buttonIndex)
                     } label: {
                         RoundedRectangle(cornerRadius: 12)
                             .stroke(Color.gray.opacity(0.5), lineWidth: 1)
@@ -80,7 +82,7 @@ struct ContentView: View {
                                     .foregroundStyle(Color.black.opacity(0.8))
                             }
                     }
-                    .padding(.horizontal, 24)
+                    .padding(.horizontal, 12)
                 }
             }
             .padding(.top, 8)
@@ -93,7 +95,6 @@ struct ContentView: View {
                     .foregroundStyle(.black.opacity(0.8))
                     .padding(.top,8)
                     .padding(.horizontal,24)
-                Spacer()
             }
         }
     }
